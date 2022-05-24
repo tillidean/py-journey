@@ -3,7 +3,7 @@
 # Algorithms and their properties
  ```pycon 
 2.1 Sorting in arrays 
-    2.1.1  [InsertionSort] (https://github.com/JoWanTech/BeginOfLife/blob/06c660c950422fef6ed6c5fce62b0f8d0a65f7ff/ADS/Sort/QuickSort.cpp)
+    2.1.1  [InsertionSort] (ADS/Sort/InsertionSort)
 2.2 Binary search
 2.3 Example: Sorting arrays
 2.4 Mergesort 
