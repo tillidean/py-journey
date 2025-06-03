@@ -1,8 +1,6 @@
 # Willkommen zum Programmierkurs-Repository! 👋
 
-Hallo zusammen und herzlich willkommen zum offiziellen Code- und Aufgaben-Repository für unseren Programmierkurs bei **ABS IT**!
-
-Dieses Repository dient als zentrale Anlaufstelle für alle Codebeispiele, Übungsaufgaben und Hausaufgaben, die wir im Laufe des Kurses behandeln werden. Ziel ist es, euch eine strukturierte Umgebung zu bieten, in der ihr nicht nur auf Materialien zugreifen, sondern auch aktiv mitarbeiten und eure Lösungen einreichen könnt.
+Hallo zusammen und herzlich willkommen zum offiziellen Code- und Aufgaben-Repository für unseren Programmierkurs bei **ABS IT**! Dieses Repository (`py-journey`) dient als zentrale Anlaufstelle für alle Codebeispiele, Übungsaufgaben und Hausaufgaben, die wir im Laufe des Kurses behandeln werden. Ziel ist es, euch eine strukturierte Umgebung zu bieten, in der ihr nicht nur auf Materialien zugreifen, sondern auch aktiv mitarbeiten und eure Lösungen einreichen könnt.
 
 ## Inhaltsverzeichnis
 
@@ -36,55 +34,57 @@ Um effektiv mit diesem Repository arbeiten zu können und deine Hausaufgaben ein
 
 ### 1. Repository Forken (Deine persönliche Kopie erstellen)
 
-Ein "Fork" ist deine persönliche Kopie dieses Haupt-Repositories auf deinem eigenen GitHub-Account. Hier kannst du Änderungen vornehmen, ohne das Original direkt zu beeinflussen.
+Ein "Fork" ist deine persönliche Kopie dieses Haupt-Repositories (`jowansulaiman/py-journey`) auf deinem eigenen GitHub-Account. Hier kannst du Änderungen vornehmen, ohne das Original direkt zu beeinflussen.
 
 * **So geht's:**
-    1.  Navigiere zur Hauptseite dieses Repositorys auf GitHub: `[Link zu deinem Haupt-Repository hier einfügen]`
+    1.  Navigiere zur Hauptseite dieses Repositorys auf GitHub: [https://github.com/jowansulaiman/py-journey](https://github.com/jowansulaiman/py-journey)
     2.  Klicke oben rechts auf den **"Fork"**-Button.
-        ![GitHub Fork Button](https://docs.github.com/assets/cb-20363/images/help/repository/fork-button.png)
-    3.  Wähle deinen GitHub-Account als Ziel für den Fork aus. GitHub erstellt nun eine Kopie des Repositorys unter deinem Account (z.B. `dein-username/kurs-repository`).
+    ![GitHub Fork Button](https://docs.github.com/assets/cb-20363/images/help/repository/fork-button.png)
+    3.  Wähle deinen GitHub-Account als Ziel für den Fork aus. GitHub erstellt nun eine Kopie des Repositorys unter deinem Account (z.B. `dein-username/py-journey`).
 
 ### 2. Deinen Fork Klonen (Code auf deinen Computer herunterladen)
 
 Nachdem du das Repository geforkt hast, musst du eine lokale Kopie deines Forks auf deinen Computer herunterladen (klonen), um mit den Dateien arbeiten zu können.
 
 * **So geht's:**
-    1.  Navigiere zu deinem Fork auf GitHub (z.B. `https://github.com/dein-username/kurs-repository`).
+    1.  Navigiere zu deinem Fork auf GitHub (z.B. `https://github.com/dein-username/py-journey`).
     2.  Klicke auf den grünen **"< > Code"**-Button.
-    3.  Kopiere die URL unter "HTTPS" (sie sollte etwa so aussehen: `https://github.com/dein-username/kurs-repository.git`).
-        ![GitHub Clone URL](https://docs.github.com/assets/cb-30830/images/help/repository/code-button.png)
+    3.  Kopiere die URL unter "HTTPS" (sie sollte etwa so aussehen: `https://github.com/dein-username/py-journey.git`). Du kannst auch SSH verwenden, falls du SSH-Keys mit GitHub eingerichtet hast.
+    ![GitHub Clone URL](https://docs.github.com/assets/cb-30830/images/help/repository/code-button.png)
     4.  Öffne ein Terminal oder eine Git-Bash auf deinem Computer.
     5.  Navigiere zu dem Verzeichnis, in dem du das Projekt speichern möchtest (z.B. `cd Documents/ABS_IT_Kurs`).
-    6.  Führe den folgenden Befehl aus (ersetze die URL mit deiner kopierten URL):
+    6.  Führe den folgenden Befehl aus (ersetze die URL mit der kopierten URL deines Forks):
         ```bash
-        git clone [https://github.com/dein-username/kurs-repository.git](https://github.com/dein-username/kurs-repository.git)
+        git clone [https://github.com/dein-username/py-journey.git](https://github.com/dein-username/py-journey.git)
         ```
     7.  Wechsle in das neu erstellte Verzeichnis:
         ```bash
-        cd kurs-repository
+        cd py-journey 
         ```
+        *(Beachte: Der Ordnername entspricht dem Repository-Namen, es sei denn, du gibst beim Klonen einen anderen Namen an).*
 
 ### 3. Upstream Remote hinzufügen (Verbindung zum Original-Repository)
 
-Damit du deinen Fork mit Änderungen aus dem ursprünglichen (unserem Haupt-) Repository aktualisieren kannst, musst du eine Verbindung ("Remote") zum Original-Repository einrichten. Dies wird üblicherweise "upstream" genannt.
+Damit du deinen Fork mit Änderungen aus dem ursprünglichen (unserem Haupt-) Repository aktualisieren kannst, musst du eine Verbindung ("Remote") zum Original-Repository einrichten. Dies wird üblicherweise "upstream" genannt. Das Original-Repository ist `https://github.com/jowansulaiman/py-journey.git`.
 
 * **So geht's (im Terminal, im Verzeichnis deines geklonten Forks):**
-    1.  Führe diesen Befehl aus, um das Original-Repository als "upstream" hinzuzufügen (ersetze den Link falls nötig):
+    1.  Führe diesen Befehl aus, um das Original-Repository als "upstream" hinzuzufügen:
         ```bash
-        git remote add upstream [Link zu deinem Haupt-Repository hier einfügen, z.B. [https://github.com/ABS-IT-Dozent/kurs-repository.git](https://github.com/ABS-IT-Dozent/kurs-repository.git)]
+        git remote add upstream [https://github.com/jowansulaiman/py-journey.git](https://github.com/jowansulaiman/py-journey.git)
         ```
+        *(Alternativ, falls du SSH bevorzugst und eingerichtet hast: `git remote add upstream git@github.com:jowansulaiman/py-journey.git`)*
     2.  Überprüfe, ob es geklappt hat:
         ```bash
         git remote -v
         ```
-        Du solltest jetzt Einträge für `origin` (deinen Fork) und `upstream` (das Haupt-Repository) sehen.
+        Du solltest jetzt Einträge für `origin` (deinen Fork, der auf `dein-username/py-journey.git` zeigt) und `upstream` (das Haupt-Repository, das auf `jowansulaiman/py-journey.git` zeigt) sehen.
 
 ### 4. Deinen Fork aktuell halten
 
-Bevor du mit einer neuen Aufgabe beginnst oder deine Arbeit einreichst, solltest du sicherstellen, dass dein Fork (und deine lokale Kopie) die neuesten Änderungen aus dem Haupt-Repository (`upstream`) enthält.
+Bevor du mit einer neuen Aufgabe beginnst oder deine Arbeit einreichst, solltest du sicherstellen, dass dein Fork (und deine lokale Kopie) die neuesten Änderungen aus dem Haupt-Repository (`upstream`, also `jowansulaiman/py-journey`) enthält.
 
-* **So geht's (im Terminal, im `main`- oder `master`-Branch deines lokalen Repositorys):**
-    1.  Stelle sicher, dass du im Hauptbranch bist (meist `main` oder `master`):
+* **So geht's (im Terminal, im `main`-Branch deines lokalen Repositorys):**
+    1.  Stelle sicher, dass du im Hauptbranch bist (üblicherweise `main`):
         ```bash
         git checkout main
         ```
@@ -92,7 +92,7 @@ Bevor du mit einer neuen Aufgabe beginnst oder deine Arbeit einreichst, solltest
         ```bash
         git fetch upstream
         ```
-    3.  Merge die Änderungen vom `upstream/main` in deinen lokalen `main`-Branch:
+    3.  Merge die Änderungen vom `upstream/main` (dem `main`-Branch von `jowansulaiman/py-journey`) in deinen lokalen `main`-Branch:
         ```bash
         git merge upstream/main
         ```
@@ -111,7 +111,7 @@ Für jede Aufgabe oder Hausaufgabe solltest du einen separaten Branch erstellen.
 
 * **So geht's (im Terminal):**
     1.  Stelle sicher, dass dein `main`-Branch aktuell ist (siehe [Deinen Fork aktuell halten](#4-deinen-fork-aktuell-halten)).
-    2.  Erstelle einen neuen Branch und wechsle direkt dorthin. Wähle einen aussagekräftigen Namen für den Branch (z.B. `hausaufgabe-01` oder `feature-user-login`):
+    2.  Erstelle einen neuen Branch und wechsle direkt dorthin. Wähle einen aussagekräftigen Namen für den Branch (z.B. `hausaufgabe-01` oder `feature-user-login`, ergänzt um deinen Namen zur besseren Unterscheidung, z.B. `hausaufgabe-01-maxmustermann`):
         ```bash
         git checkout -b name-des-neuen-branches 
         # z.B. git checkout -b hausaufgabe-01-maxmustermann
@@ -145,17 +145,17 @@ Während du an der Aufgabe arbeitest:
 
 ## Hausaufgaben einreichen (Pull Request erstellen)
 
-Sobald du mit einer Aufgabe fertig bist und deine Änderungen auf deinem Branch zu deinem Fork auf GitHub gepusht hast, kannst du einen **Pull Request (PR)** erstellen. Dies ist die Aufforderung, deine Änderungen in das Haupt-Repository zu übernehmen (und für mich die Möglichkeit, deine Arbeit zu sehen und Feedback zu geben).
+Sobald du mit einer Aufgabe fertig bist und deine Änderungen auf deinem Branch zu deinem Fork auf GitHub gepusht hast, kannst du einen **Pull Request (PR)** erstellen. Dies ist die Aufforderung, deine Änderungen in das Haupt-Repository (`jowansulaiman/py-journey`) zu übernehmen (und für mich die Möglichkeit, deine Arbeit zu sehen und Feedback zu geben).
 
 * **So geht's:**
-    1.  Gehe zu deinem Fork auf GitHub (z.B. `https://github.com/dein-username/kurs-repository`).
+    1.  Gehe zu deinem Fork auf GitHub (z.B. `https://github.com/dein-username/py-journey`).
     2.  Wenn du kürzlich Änderungen zu einem Branch gepusht hast, zeigt GitHub oft einen gelben Hinweis mit einem Button **"Compare & pull request"**. Klicke darauf.
-        ![Compare & pull request button](https://docs.github.com/assets/cb-119532/images/help/pull_requests/compare-and-pull-request-button.png)
-    3.  Alternativ kannst du zum Tab **"Pull requests"** gehen und auf **"New pull request"** klicken.
+        ![Compare & pull request button](https://learn.microsoft.com/en-us/contribute/content/media/create-pull-request/create-pr-compare.png)
+    3.  Alternativ kannst du zum Tab **"Pull requests"** deines Forks gehen und auf **"New pull request"** klicken.
     4.  **WICHTIG:** Stelle sicher, dass die Basis für den Pull Request korrekt ist:
-        * **`base repository`**: Das Haupt-Repository (z.B. `ABS-IT-Dozent/kurs-repository`) und der `main` Branch (oder ein spezifischer Aufgabenbranch, falls von mir vorgegeben).
-        * **`head repository`**: Dein Fork (z.B. `dein-username/kurs-repository`) und der Branch, auf dem deine Lösungen sind (z.B. `hausaufgabe-01-maxmustermann`).
-        ![Pull Request base and head](https://docs.github.com/assets/cb-78334/images/help/pull_requests/pr-options.png)
+        * **`base repository`**: Das Haupt-Repository, also **`jowansulaiman/py-journey`**. Der Ziel-Branch ist normalerweise `main` (oder ein spezifischer Aufgabenbranch, falls von mir vorgegeben).
+        * **`head repository`**: Dein Fork (z.B. `dein-username/py-journey`) und der Branch, auf dem deine Lösungen sind (z.B. `hausaufgabe-01-maxmustermann`).
+    ![Pull Request base and head](https://docs.github.com/assets/cb-166982/images/help/pull_requests/merge-pull-request-options.png)
     5.  Gib deinem Pull Request einen klaren Titel (z.B. "Hausaufgabe 01 - Max Mustermann") und eine kurze Beschreibung deiner Lösung oder eventueller Probleme.
     6.  Klicke auf **"Create pull request"**.
 
@@ -167,8 +167,8 @@ Ich werde dann benachrichtigt, kann deinen Code reviewen und dir Feedback geben 
 
 * **Commit-Nachrichten:** Schreibt aussagekräftige Commit-Nachrichten. Ein guter Stil ist z.B. "HA01: Implementiere Funktion X" oder "Fix: Fehler bei Eingabevalidierung".
 * **Ein Branch pro Aufgabe:** Verwendet für jede Hausaufgabe einen neuen, sauberen Branch.
-* **Regelmäßig Pullen/Fetchen:** Haltet euren `main`-Branch aktuell mit dem `upstream`-Repository, bevor ihr neue Aufgaben-Branches erstellt.
-* **Keine direkten Pushes zum `main`-Branch eures Forks, wenn es um Aufgaben geht:** Arbeitet immer in Feature-Branches und mergt diese dann (oder lasst sie per PR mergen).
+* **Regelmäßig Pullen/Fetchen:** Haltet euren `main`-Branch aktuell mit dem `upstream`-Repository (`jowansulaiman/py-journey`), bevor ihr neue Aufgaben-Branches erstellt.
+* **Keine direkten Pushes zum `main`-Branch eures Forks, wenn es um Aufgaben geht, die noch nicht mit dem Upstream synchronisiert wurden:** Arbeitet immer in Feature-Branches.
 * **Deadlines:** Beachtet die Abgabefristen für die Hausaufgaben!
 
 ---
@@ -178,6 +178,6 @@ Ich werde dann benachrichtigt, kann deinen Code reviewen und dir Feedback geben 
 Wenn ihr Fragen zum Workflow, zu Git, GitHub oder den Aufgaben habt:
 
 * Stellt sie gerne im Kurs.
-* [Optional: Link zu einem Forum, Chat-Kanal oder E-Mail-Adresse für Fragen hier einfügen]
+* Oder im Teams mich ansprechen. 
 
 Viel Erfolg und Spaß beim Programmieren!
