@@ -1,0 +1,1134 @@
+\documentclass[aspectratio=169]{beamer} % Seitenverhältnis 16:9
+
+\usetheme{CambridgeUS}
+\usepackage{fontawesome}
+% Standard Pakete
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{hyperref}       % Für Links, gut am Ende der meisten Paketladungen
+\definecolor{mygray}{gray}{0.90}     % 90 % weiß  ▒▒▒
+\setbeamercolor{title}{bg=mygray, fg=black}
+% Grafik und Farbe
+\usepackage{graphicx}
+\usepackage[svgnames]{xcolor} % Bietet mehr Farbnamen
+\usepackage[abs]{overpic}   % Falls du Text/Grafiken über Bilder legen willst
+\setbeamercolor{block alerted alerted}{fg=black,bg=red!10}
+\setbeamercolor{block alerted title}{fg=white,bg=red}
+\setbeamercolor{block alerted body}{fg=black,bg=red!10}
+% Listings für Code
+\usepackage{listings}
+
+% TikZ und verwandte Bibliotheken (falls für komplexere Grafiken benötigt)
+\usepackage{tikz}
+\usetikzlibrary{positioning, calc}
+
+% Beamer spezifisch / Layout
+\usepackage{multicol}       % Für mehrspaltige Layouts (wird für Quizze jetzt weniger relevant)
+\usepackage{tcolorbox}      % Geladen, aber im aktuellen Code nicht verwendet
+\tcbuselibrary{skins}       % Gehört zu tcolorbox
+
+% \usepackage{animate} % Geladen, aber im aktuellen Code nicht verwendet (für Animationen in PDFs)
+
+% Custom colors for code listings
+\definecolor{codeblue}{rgb}{0.1, 0.1, 0.8}
+\definecolor{codegray}{rgb}{0.5, 0.5, 0.5}
+\definecolor{codepurple}{rgb}{0.6, 0.1, 0.6}
+\definecolor{backcolor}{rgb}{0.95, 0.95, 0.92}
+% Farben setzen
+\definecolor{MyRed}{HTML}{D72638}
+\setbeamercolor{block alerted title}{fg=white,bg=MyRed}
+\setbeamercolor{block alerted body}{fg=black,bg=MyRed!10}
+\setbeamercolor{block alerted alerted}{fg=black,bg=MyRed!10}
+
+\lstdefinestyle{mystyle}{
+    language=Python,
+    backgroundcolor=\color{backcolor},
+    commentstyle=\color{codegray},
+    keywordstyle=\color{codeblue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\tiny,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=none,
+    keepspaces=true,
+    numbers=left,
+    numbersep=3pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    literate={ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1 {Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1 {ß}{{\ss}}1
+}
+\lstset{style=mystyle}
+
+% Eigene Farben für Blöcke
+\setbeamercolor{block title}{bg=blue!20,fg=black}
+\setbeamercolor{block body}{bg=blue!5,fg=black}
+\setbeamercolor{alertblock title}{bg=red!20,fg=black} % Eigene Farbe für Alertblock-Titel
+\setbeamercolor{alertblock body}{bg=red!5,fg=black}   % Eigene Farbe für Alertblock-Body
+
+
+\title{Datenverarbeitung mit Python}
+\subtitle{Dateien, JSON und Reguläre Ausdrücke}
+\author{Jowan Sulaiman}
+\institute{\href{https://github.com/jowansulaiman/py-journey}{GitHub Repository: py-journey}}
+\date{\today}
+
+
+\begin{document}
+
+\begin{frame}[plain] % Title page ohne frame title etc.
+    \titlepage
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Inhaltsverzeichnis}
+\tableofcontents
+\end{frame}
+
+% --- Einführung in File Handling ---
+\section{Einführung in File Handling}
+
+\begin{frame}[fragile]
+\frametitle{Was ist File Handling?}
+\begin{itemize}
+    \item \textbf{Definition:} Lesen von Daten aus Dateien und Schreiben von Daten in Dateien.
+    \item \textbf{Warum ist das wichtig?}
+    \begin{itemize}
+        \item Persistente Speicherung von Daten
+        \item Datenaustausch zwischen Programmen
+        \item Verarbeitung großer Datenmengen
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Grundlegende Dateioperationen}
+Die typischen Schritte im Umgang mit Dateien sind:
+\begin{enumerate}
+    \item Datei \textbf{öffnen}
+    \item Daten \textbf{lesen} oder \textbf{schreiben}
+    \item Datei \textbf{schließen}
+\end{enumerate}
+\vspace{0.5cm}
+Weitere Operationen können sein:
+\begin{itemize}
+    \item Datei \textbf{löschen}
+    \item Dateiinformationen abfragen
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Dateitypen im Überblick}
+\begin{columns}[T] % Top-aligned columns
+    \column{0.5\textwidth}
+    \textbf{Textdateien}
+    \begin{itemize}
+        \item \texttt{.txt}, \texttt{.csv}, \texttt{.json}, \texttt{.py}
+        \item Menschenlesbar
+        \item Zeilenweise Struktur
+        \item Wichtig: Zeichenkodierung (z.B. UTF-8)
+    \end{itemize}
+    \column{0.5\textwidth}
+    \textbf{Binärdateien}
+    \begin{itemize}
+        \item \texttt{.jpg}, \texttt{.mp3}, \texttt{.exe}, \texttt{.pdf}
+        \item Nicht direkt lesbar
+        \item Spezifische Programm-Interpretation
+        \item Exakte Strukturkenntnis nötig
+    \end{itemize}
+\end{columns}
+\end{frame}
+
+% --- Python File Handling ---
+\section{Python File Handling}
+
+\begin{frame}[fragile]
+\frametitle{Dateien öffnen: \texttt{open()}}
+Die Funktion \texttt{open()} ist der Schlüssel zum Dateizugriff.
+
+\begin{block}{Syntax}
+\texttt{file\_object = open("dateiname.txt", "modus")}
+\end{block}
+\textbf{Wichtige Modi:}
+\begin{itemize}
+    \item \texttt{"r"}: \textbf{R}ead (Lesen) - Datei muss existieren. (Standard)
+    \item \texttt{"w"}: \textbf{W}rite (Schreiben) - Erstellt Datei / Überschreibt Inhalt.
+    \item \texttt{"a"}: \textbf{A}ppend (Anhängen) - Erstellt Datei / Fügt am Ende hinzu.
+    \item \texttt{"x"}: E\textbf{x}clusive creation (Exklusives Erstellen) - Fehler, wenn Datei existiert.
+    \item \texttt{"+"} (z.B. \texttt{"r+"}): Lesen \textbf{und} Schreiben.
+    \item \texttt{"b"} (z.B. \texttt{"rb"}): \textbf{B}inärmodus.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Dateien sicher schließen: Der \texttt{with}-Block}
+\begin{alertblock}{Wichtig!}
+Geöffnete Dateien müssen immer geschlossen werden, um Datenverlust oder Ressourcenprobleme zu vermeiden.
+\end{alertblock}
+Der \texttt{with}-Block (Context Manager) erledigt das automatisch:
+\begin{lstlisting}[language=Python]
+with open("beispiel.txt", "r") as f:
+    inhalt = f.read()
+    print(inhalt)
+# Datei f ist hier automatisch geschlossen!
+\end{lstlisting}
+\textbf{Vorteile:}
+\begin{itemize}
+    \item Kein vergessenes \texttt{f.close()}
+    \item Sauberer Code
+    \item Automatische Schließung auch bei Fehlern
+\end{itemize}
+\end{frame}
+
+% --- Python Read Files ---
+\section{Python Read Files}
+\begin{frame}[fragile]
+\frametitle{Lesemethoden im Überblick}
+Angenommen, \texttt{meine\_datei.txt} enthält:
+\begin{verbatim}
+Zeile 1
+Zweite Zeile
+Ende
+\end{verbatim}
+\textbf{1. Gesamten Inhalt lesen: \texttt{read()}}
+\begin{lstlisting}[language=Python]
+with open("meine_datei.txt", "r") as f:
+    inhalt = f.read()
+    # inhalt ist "Zeile 1\nZweite Zeile\nEnde"
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Lesemethoden (Forts.)}
+\textbf{2. Einzelne Zeile lesen: \texttt{readline()}}
+\begin{lstlisting}[language=Python]
+with open("meine_datei.txt", "r") as f:
+    zeile1 = f.readline() # "Zeile 1\n"
+    zeile2 = f.readline() # "Zweite Zeile\n"
+\end{lstlisting}
+\textbf{3. Alle Zeilen als Liste: \texttt{readlines()}}
+\begin{lstlisting}[language=Python]
+with open("meine_datei.txt", "r") as f:
+    zeilen_liste = f.readlines()
+    # zeilen_liste ist ['Zeile 1\n', 'Zweite Zeile\n', 'Ende']
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Lesemethoden: Effizientes Iterieren}
+\textbf{4. Zeilenweise Iteration (bevorzugt für große Dateien):}
+\begin{lstlisting}[language=Python]
+with open("meine_datei.txt", "r") as f:
+    for zeile in f: # Jede Zeile wird einzeln geladen
+        print(zeile.strip()) # .strip() entfernt \n
+\end{lstlisting}
+\begin{block}{Vorteil}
+    Diese Methode ist speichereffizient, da nicht die gesamte Datei auf einmal in den Speicher geladen wird.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Übungen: Dateien lesen}
+\textbf{Übung 1:}
+Erstelle \texttt{gedicht.txt}. Schreibe ein Skript, das den gesamten Inhalt liest und ausgibt.
+\vspace{0.5em}
+
+\textbf{Übung 2:}
+Lies \texttt{gedicht.txt} zeilenweise und gib jede Zeile mit Zeilennummer aus.
+\vspace{0.5em}
+
+\textbf{Übung 3:}
+Datei \texttt{daten.txt} (z.B. \texttt{Apfel,Rot}): Lies sie und gib nur die Fruchtnamen aus.
+\end{frame}
+
+% --- Quiz: Dateien lesen ---
+\begin{frame}[fragile]
+\frametitle{Quiz: Dateien lesen – Frage 1}
+Welche Methode liest den gesamten Inhalt einer Datei als einen einzigen String?
+\begin{enumerate}
+    \item[A)] \texttt{readlines()}
+    \item[B)] \texttt{read()}
+    \item[C)] \texttt{readline()}
+    \item[D)] \texttt{open()}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: Dateien lesen – Frage 1}
+\textbf{Frage 1:} Welche Methode liest den gesamten Inhalt einer Datei als einen einzigen String?
+\vspace{1em}
+\textbf{Korrekte Antwort: B) \texttt{read()}}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: Dateien lesen – Frage 2}
+Was ist der Vorteil der Verwendung des \texttt{with open(...)} Konstrukts?
+\begin{enumerate}
+    \item[A)] Öffnet im Schreibmodus.
+    \item[B)] Schließt die Datei automatisch.
+    \item[C)] Liest schneller.
+    \item[D)] Konvertiert in JSON.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: Dateien lesen – Frage 2}
+\textbf{Frage 2:} Was ist der Vorteil der Verwendung des \texttt{with open(...)} Konstrukts?
+\vspace{1em}
+\textbf{Korrekte Antwort: B) Es schließt die Datei automatisch.}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: Dateien lesen – Frage 3}
+Welcher Modus wird verwendet, um eine Datei nur zum Lesen zu öffnen und einen Fehler auszulösen, wenn sie nicht existiert?
+\begin{enumerate}
+    \item[A)] \texttt{"w"}
+    \item[B)] \texttt{"a"}
+    \item[C)] \texttt{"r+"}
+    \item[D)] \texttt{"r"}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: Dateien lesen – Frage 3}
+\textbf{Frage 3:} Welcher Modus wird verwendet, um eine Datei nur zum Lesen zu öffnen und einen Fehler auszulösen, wenn sie nicht existiert?
+\vspace{1em}
+\textbf{Korrekte Antwort: D) \texttt{"r"}}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: Dateien lesen – Frage 4}
+Wie kann man am besten zeilenweise über eine große Datei iterieren, um Speicher zu sparen?
+\begin{enumerate}
+    \item[A)] \texttt{file.readlines()} + Schleife
+    \item[B)] \texttt{for line in file:}
+    \item[C)] \texttt{file.read().splitlines()}
+    \item[D)] \texttt{file.readline()} in \texttt{while}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: Dateien lesen – Frage 4}
+\textbf{Frage 4:} Wie kann man am besten zeilenweise über eine große Datei iterieren, um Speicher zu sparen?
+\vspace{1em}
+\textbf{Korrekte Antwort: B) \texttt{for line in file:}}
+\end{frame}
+
+
+% --- Python Write/Create Files ---
+\section{Python Write/Create Files}
+
+\begin{frame}[fragile]
+\frametitle{Schreibmodi im Detail}
+\begin{itemize}
+    \item \texttt{"w"} (Write):
+    \begin{itemize}
+        \item Erstellt Datei (wenn nicht existent).
+        \item \textbf{Überschreibt} bestehenden Inhalt!
+    \end{itemize}
+    \item \texttt{"a"} (Append):
+    \begin{itemize}
+        \item Erstellt Datei (wenn nicht existent).
+        \item Fügt Daten am \textbf{Ende} hinzu.
+    \end{itemize}
+    \item \texttt{"x"} (Exclusive Creation):
+    \begin{itemize}
+        \item Erstellt Datei.
+        \item Fehler (\texttt{FileExistsError}), wenn Datei bereits existiert.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Schreibmethoden}
+\textbf{1. Einzelnen String schreiben: \texttt{write()}}
+\begin{lstlisting}[language=Python]
+with open("ausgabe.txt", "w") as f:
+    f.write("Hallo Welt!\n")
+    f.write("Zweite Zeile.")
+\end{lstlisting}
+\textit{Inhalt von \texttt{ausgabe.txt}:}
+\begin{verbatim}
+Hallo Welt!
+Zweite Zeile.
+\end{verbatim}
+\vspace{1em}
+\textbf{2. Liste von Strings schreiben: \texttt{writelines()}}
+\begin{lstlisting}[language=Python]
+zeilen = ["Erste Zeile\n", "Zweite Zeile\n"]
+with open("mehrzeilig.txt", "w") as f:
+    f.writelines(zeilen)
+\end{lstlisting}
+\begin{alertblock}{Wichtig}
+\texttt{writelines()} fügt \textbf{keine} Zeilenumbrüche (\texttt{\textbackslash{}n}) automatisch hinzu! Sie müssen in den Strings enthalten sein, wenn gewünscht.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Übungen: Dateien schreiben/erstellen}
+\textbf{Übung 1:}
+Skript: Erstelle \texttt{meine\_notizen.txt}. Frage nach 3 Notizen, schreibe jede in neue Zeile.
+\vspace{0.5em}
+
+\textbf{Übung 2:}
+Skript: Schreibe Einkaufsliste (Liste von Strings) in \texttt{einkaufsliste.txt}. Jeder Artikel neue Zeile. Bei Existenz: anhängen.
+\vspace{0.5em}
+
+\textbf{Übung 3:}
+Skript: Erstelle \texttt{log.txt} exklusiv (\texttt{"x"}). Schreibe Startnachricht. Bei Existenz: Meldung.
+\end{frame}
+
+% --- Quiz: Dateien schreiben/erstellen ---
+\begin{frame}[fragile]
+\frametitle{Quiz: Dateien schreiben/erstellen – Frage 1}
+Welcher Modus überschreibt eine existierende Datei oder erstellt eine neue, wenn sie nicht existiert?
+\begin{enumerate}
+    \item[A)] \texttt{"r"}
+    \item[B)] \texttt{"a"}
+    \item[C)] \texttt{"x"}
+    \item[D)] \texttt{"w"}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: Dateien schreiben/erstellen – Frage 1}
+\textbf{Frage 1:} Welcher Modus überschreibt eine existierende Datei oder erstellt eine neue, wenn sie nicht existiert?
+\vspace{1em}
+\textbf{Korrekte Antwort: D) \texttt{"w"}}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: Dateien schreiben/erstellen – Frage 2}
+Was bewirkt \texttt{file.writelines(["Hallo", "Welt"])}?
+\begin{enumerate}
+    \item[A)] Schreibt "Hallo\textbackslash{}nWelt\textbackslash{}n"
+    \item[B)] Schreibt "Hallo Welt"
+    \item[C)] Schreibt "HalloWelt"
+    \item[D)] Fehler (fehlende \textbackslash{}n)
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: Dateien schreiben/erstellen – Frage 2}
+\textbf{Frage 2:} Was bewirkt \texttt{file.writelines(["Hallo", "Welt"])}?
+\vspace{1em}
+\textbf{Korrekte Antwort: C) Schreibt "HalloWelt"}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: Dateien schreiben/erstellen – Frage 3}
+Sie möchten Daten an das Ende einer bestehenden Datei anhängen, ohne den vorhandenen Inhalt zu löschen. Welchen Modus verwenden Sie?
+\begin{enumerate}
+    \item[A)] \texttt{"w"}
+    \item[B)] \texttt{"r+"}
+    \item[C)] \texttt{"a"}
+    \item[D)] \texttt{"x"}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: Dateien schreiben/erstellen – Frage 3}
+\textbf{Frage 3:} Sie möchten Daten an das Ende einer bestehenden Datei anhängen, ohne den vorhandenen Inhalt zu löschen. Welchen Modus verwenden Sie?
+\vspace{1em}
+\textbf{Korrekte Antwort: C) \texttt{"a"}}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: Dateien schreiben/erstellen – Frage 4}
+Welcher Fehler wird ausgelöst, wenn man versucht, eine Datei im Modus \texttt{"x"} zu erstellen, die bereits existiert?
+\begin{enumerate}
+    \item[A)] \texttt{IOError}
+    \item[B)] \texttt{FileExistsError}
+    \item[C)] \texttt{FileNotFoundError}
+    \item[D)] \texttt{ValueError}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: Dateien schreiben/erstellen – Frage 4}
+\textbf{Frage 4:} Welcher Fehler wird ausgelöst, wenn man versucht, eine Datei im Modus \texttt{"x"} zu erstellen, die bereits existiert?
+\vspace{1em}
+\textbf{Korrekte Antwort: B) \texttt{FileExistsError}}
+\end{frame}
+
+
+% --- Python Delete Files ---
+\section{Python Delete Files}
+
+\begin{frame}[fragile]
+\frametitle{Dateien löschen: \texttt{os.remove()}}
+Das \texttt{os}-Modul wird für Dateioperationen auf Systemebene benötigt.
+\begin{lstlisting}[language=Python]
+import os
+\end{lstlisting}
+\textbf{Datei löschen:}
+\begin{lstlisting}[language=Python]
+# Zuerst prüfen, ob die Datei existiert (gute Praxis!)
+if os.path.exists("zu_loeschen.txt"):
+    os.remove("zu_loeschen.txt")
+    print("Datei gelöscht.")
+else:
+    print("Datei nicht gefunden.")
+\end{lstlisting}
+\begin{block}{Mögliche Fehler}
+    \texttt{FileNotFoundError}: Datei nicht da. \\
+    \texttt{PermissionError}: Keine Berechtigung. \\
+    \texttt{IsADirectoryError}: Versuch, Ordner zu löschen.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Verzeichnisse löschen}
+\textbf{Leeres Verzeichnis löschen: \texttt{os.rmdir()}}
+\begin{lstlisting}[language=Python]
+import os
+# os.mkdir("leerer_ordner") # Zum Testen
+if os.path.exists("leerer_ordner") and \
+   not os.listdir("leerer_ordner"): # Prüfen ob leer
+    os.rmdir("leerer_ordner")
+    print("Leerer Ordner gelöscht.")
+\end{lstlisting}
+Löst \texttt{OSError} aus, wenn der Ordner nicht leer ist.
+\vspace{0.5em}
+\textbf{Verzeichnis (auch nicht leer) löschen: \texttt{shutil.rmtree()}}
+\begin{lstlisting}[language=Python]
+import shutil # 'Shell Utilities' Modul
+import os     # Für os.path.exists und os.makedirs
+
+# Zum Testen erstellen:
+# if not os.path.exists("voller_ordner"):
+#    os.makedirs("voller_ordner/sub", exist_ok=True)
+#    with open("voller_ordner/datei.txt", "w") as f:
+#        f.write("Testinhalt")
+
+if os.path.exists("voller_ordner"):
+    shutil.rmtree("voller_ordner")
+    print("Ordner samt Inhalt gelöscht.")
+else:
+    print("Ordner 'voller_ordner' nicht gefunden zum Löschen.")
+\end{lstlisting}
+\begin{alertblock}{Vorsicht!}
+\texttt{shutil.rmtree()} löscht rekursiv und unwiderruflich!
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Übungen: Dateien löschen}
+\begin{alertblock}{Sicherheitshinweis}
+Arbeiten Sie bei Löschübungen immer mit Testdateien/-ordnern!
+\end{alertblock}
+
+\textbf{Übung 1:}
+Skript: Erstelle \texttt{temp\_datei.txt}. Prüfe Existenz, dann lösche sie. Gib Meldungen aus.
+\vspace{0.5em}
+
+\textbf{Übung 2:}
+Skript: Erstelle leeren Ordner \texttt{temp\_ordner}. Lösche ihn nur, wenn er leer ist.
+\vspace{0.5em}
+
+\textbf{Übung 3 (Vorsicht!):}
+Skript: Erstelle \texttt{ordner\_zum\_loeschen} mit einer Datei darin. Nutze \texttt{shutil.rmtree()} zum Löschen. Gib eine Warnung aus.
+\end{frame}
+
+% --- Quiz: Dateien löschen ---
+\begin{frame}[fragile]
+\frametitle{Quiz: Dateien löschen – Frage 1}
+Welche Funktion wird verwendet, um eine einzelne Datei in Python zu löschen?
+\begin{enumerate}
+    \item[A)] \texttt{os.delete("datei.txt")}
+    \item[B)] \texttt{os.rmdir("datei.txt")}
+    \item[C)] \texttt{os.remove("datei.txt")}
+    \item[D)] \texttt{shutil.remove("datei.txt")}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: Dateien löschen – Frage 1}
+\textbf{Frage 1:} Welche Funktion wird verwendet, um eine einzelne Datei in Python zu löschen?
+\vspace{1em}
+\textbf{Korrekte Antwort: C) \texttt{os.remove("datei.txt")}}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: Dateien löschen – Frage 2}
+Was passiert, wenn man \texttt{os.remove()} auf eine nicht existierende Datei anwendet?
+\begin{enumerate}
+    \item[A)] Es passiert nichts.
+    \item[B)] Es wird ein \texttt{FileExistsError} ausgelöst.
+    \item[C)] Es wird ein \texttt{FileNotFoundError} ausgelöst.
+    \item[D)] Die Datei wird erstellt.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: Dateien löschen – Frage 2}
+\textbf{Frage 2:} Was passiert, wenn man \texttt{os.remove()} auf eine nicht existierende Datei anwendet?
+\vspace{1em}
+\textbf{Korrekte Antwort: C) Es wird ein \texttt{FileNotFoundError} ausgelöst.}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: Dateien löschen – Frage 3}
+Welche Funktion kann ein Verzeichnis inklusive seines gesamten Inhalts löschen?
+\begin{enumerate}
+    \item[A)] \texttt{os.rmdir()}
+    \item[B)] \texttt{os.removeall()}
+    \item[C)] \texttt{shutil.rmtree()}
+    \item[D)] \texttt{os.delete\_tree()}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: Dateien löschen – Frage 3}
+\textbf{Frage 3:} Welche Funktion kann ein Verzeichnis inklusive seines gesamten Inhalts löschen?
+\vspace{1em}
+\textbf{Korrekte Antwort: C) \texttt{shutil.rmtree()}}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: Dateien löschen – Frage 4}
+Was ist eine gute Praxis, bevor man versucht, eine Datei zu löschen?
+\begin{enumerate}
+    \item[A)] Die Datei zuerst umbenennen.
+    \item[B)] Den Inhalt der Datei auslesen.
+    \item[C)] Mit \texttt{os.path.exists()} prüfen, ob die Datei existiert.
+    \item[D)] Die Zugriffsrechte der Datei ändern.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: Dateien löschen – Frage 4}
+\textbf{Frage 4:} Was ist eine gute Praxis, bevor man versucht, eine Datei zu löschen?
+\vspace{1em}
+\textbf{Korrekte Antwort: C) Mit \texttt{os.path.exists()} prüfen, ob die Datei existiert.}
+\end{frame}
+
+
+% --- JSON ---
+\section{JSON}
+
+\begin{frame}[fragile]
+\frametitle{Was ist JSON?}
+\textbf{J}ava\textbf{S}cript \textbf{O}bject \textbf{N}otation
+\begin{itemize}
+    \item Leichtgewichtiges Datenaustauschformat.
+    \item Für Menschen: Einfach zu lesen und zu schreiben.
+    \item Für Maschinen: Einfach zu parsen und zu generieren.
+    \item Textbasiert und sprachunabhängig.
+\end{itemize}
+\textbf{Typische Anwendungsfälle:}
+\begin{itemize}
+    \item APIs (Daten zwischen Server und Webanwendung)
+    \item Konfigurationsdateien
+    \item Speicherung strukturierter Daten
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{JSON Syntax: Bausteine}
+JSON basiert auf zwei Strukturen:
+\begin{itemize}
+    \item \textbf{Objekte:} Sammlung von Schlüssel-Wert-Paaren.
+    \begin{itemize}
+        \item In \texttt{\{\}} (geschweifte Klammern).
+        \item Schlüssel: Strings in \textbf{doppelten} Anführungszeichen.
+        \item Beispiel: \texttt{\{"name": "Max", "alter": 30\}}
+    \end{itemize}
+    \item \textbf{Arrays (Listen):} Geordnete Liste von Werten.
+    \begin{itemize}
+        \item In \texttt{[]} (eckige Klammern).
+        \item Beispiel: \texttt{["Apfel", "Banane", 100]}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{JSON Syntax: Wertetypen}
+Die erlaubten Werte in JSON sind:
+\begin{itemize}
+    \item \textbf{String:} In doppelten Anführungszeichen (\texttt{"Hallo"}).
+    \item \textbf{Zahl:} Ganzzahl oder Fließkommazahl (\texttt{123}, \texttt{3.14}).
+    \item \textbf{Boolean:} \texttt{true} oder \texttt{false} (kleingeschrieben!).
+    \item \textbf{Array:} \texttt{[...]}.
+    \item \textbf{Objekt:} \texttt{\{...\}}.
+    \item \textbf{\texttt{null}:} Repräsentiert einen leeren Wert (wie \texttt{None} in Python).
+\end{itemize}
+\begin{block}{Beispiel JSON-Struktur}
+\begin{lstlisting}[language=json, basicstyle=\ttfamily\tiny]
+{
+  "id": 1, "name": "Anna", "active": true,
+  "courses": ["Math", "Physics"], "info": null
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Python und JSON: Das \texttt{json}-Modul}
+Python bietet das \texttt{json}-Modul für die Arbeit mit JSON-Daten.
+\begin{lstlisting}[language=Python]
+import json
+\end{lstlisting}
+\textbf{Wichtige Funktionen:}
+\begin{itemize}
+    \item \texttt{json.dumps(py\_obj)}: Python-Objekt $\rightarrow$ JSON-String (Serialisieren).
+    \item \texttt{json.loads(json\_str)}: JSON-String $\rightarrow$ Python-Objekt (Deserialisieren).
+    \item \texttt{json.dump(py\_obj, file\_obj)}: Python-Objekt $\rightarrow$ JSON-Datei.
+    \item \texttt{json.load(file\_obj)}: JSON-Datei $\rightarrow$ Python-Objekt.
+\end{itemize}
+Der Parameter \texttt{indent} bei \texttt{dumps} und \texttt{dump} sorgt für eine schön formatierte ("pretty-printed") Ausgabe.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Beispiel: Python $\leftrightarrow$ JSON String}
+\textbf{Python-Dict zu JSON-String (\texttt{dumps}):}
+\begin{lstlisting}[language=Python]
+import json
+py_data = {"name": "Kurs", "teilnehmer": 15, "aktiv": True}
+
+json_str = json.dumps(py_data, indent=4) # Mit Einrückung
+print(json_str)
+\end{lstlisting}
+\textit{Ausgabe:}
+\begin{lstlisting}[language=json, basicstyle=\ttfamily\tiny]
+{
+    "name": "Kurs",
+    "teilnehmer": 15,
+    "aktiv": true
+}
+\end{lstlisting}
+\vspace{1em}
+\textbf{JSON-String zu Python-Dict (\texttt{loads}):}
+\begin{lstlisting}[language=Python]
+json_input = '{"produkt": "Laptop", "preis": 1200.50}'
+py_obj = json.loads(json_input)
+print(py_obj["produkt"]) # Ausgabe: Laptop
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Beispiel: Python $\leftrightarrow$ JSON Datei}
+\textbf{Python-Daten in JSON-Datei schreiben (\texttt{dump}):}
+\begin{lstlisting}[language=Python]
+import json
+user_data = {"id": 7, "username": "coder"}
+
+with open("user_config.json", "w") as f:
+    json.dump(user_data, f, indent=2)
+# Datei user_config.json wird erstellt/überschrieben
+\end{lstlisting}
+\vspace{1em}
+\textbf{JSON-Datei in Python-Daten laden (\texttt{load}):}
+\begin{lstlisting}[language=Python]
+import json
+with open("user_config.json", "r") as f:
+    loaded_config = json.load(f)
+    print(loaded_config["username"]) # Ausgabe: coder
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Typen-Mapping: Python $\leftrightarrow$ JSON}
+\begin{columns}[T]
+    \column{0.5\textwidth}
+    \textbf{Python}
+    \begin{itemize}
+        \item \texttt{dict}
+        \item \texttt{list}, \texttt{tuple}
+        \item \texttt{str}
+        \item \texttt{int}, \texttt{float}
+        \item \texttt{True}
+        \item \texttt{False}
+        \item \texttt{None}
+    \end{itemize}
+    \column{0.5\textwidth}
+    \textbf{JSON}
+    \begin{itemize}
+        \item \texttt{object}
+        \item \texttt{array}
+        \item \texttt{string}
+        \item \texttt{number}
+        \item \texttt{true}
+        \item \texttt{false}
+        \item \texttt{null}
+    \end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Übungen: JSON}
+\textbf{Übung 1:}
+Python-Dict (Buch: Titel, Autor, Jahr, ISBN) $\rightarrow$ JSON-String (Einrückung: 2). Gib aus.
+\vspace{0.5em}
+
+\textbf{Übung 2:}
+Gegebener JSON-String (Mitarbeiter-Daten) $\rightarrow$ Python-Dict. Gib Name und 2. Projekt aus.
+\vspace{0.5em}
+
+\textbf{Übung 3:}
+Liste von Dicts (Personen: Name, Stadt) $\rightarrow$ \texttt{personen.json}. Dann Datei lesen und Namen der 1. Person ausgeben.
+\end{frame}
+
+% --- Quiz: JSON ---
+\begin{frame}[fragile]
+\frametitle{Quiz: JSON – Frage 1}
+Welche Python-Funktion wird verwendet, um ein Python-Dictionary in einen JSON-String zu konvertieren?
+\begin{enumerate}
+    \item[A)] \texttt{json.load()}
+    \item[B)] \texttt{json.read()}
+    \item[C)] \texttt{json.dumps()}
+    \item[D)] \texttt{json.convert()}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: JSON – Frage 1}
+\textbf{Frage 1:} Welche Python-Funktion wird verwendet, um ein Python-Dictionary in einen JSON-String zu konvertieren?
+\vspace{1em}
+\textbf{Korrekte Antwort: C) \texttt{json.dumps()}}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: JSON – Frage 2}
+Was ist das JSON-Äquivalent zum Python-Wert \texttt{None}?
+\begin{enumerate}
+    \item[A)] \texttt{undefined}
+    \item[B)] \texttt{NIL}
+    \item[C)] \texttt{empty}
+    \item[D)] \texttt{null}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: JSON – Frage 2}
+\textbf{Frage 2:} Was ist das JSON-Äquivalent zum Python-Wert \texttt{None}?
+\vspace{1em}
+\textbf{Korrekte Antwort: D) \texttt{null}}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: JSON – Frage 3}
+Sie haben eine JSON-Datei \texttt{data.json} und möchten deren Inhalt in ein Python-Objekt laden. Welche Funktion verwenden Sie (angenommen die Datei ist geöffnet als `f`)?
+\begin{enumerate}
+    \item[A)] \texttt{json.loads(f.read())}
+    \item[B)] \texttt{json.dump(f)}
+    \item[C)] \texttt{json.load(f)}
+    \item[D)] \texttt{json.parse(f)}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: JSON – Frage 3}
+\textbf{Frage 3:} Sie haben eine JSON-Datei \texttt{data.json} und möchten deren Inhalt in ein Python-Objekt laden. Welche Funktion verwenden Sie (angenommen die Datei ist geöffnet als `f`)?
+\vspace{1em}
+\textbf{Korrekte Antwort: C) \texttt{json.load(f)}}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: JSON – Frage 4}
+Welches der folgenden JSON-Schlüssel-Wert-Paare ist syntaktisch korrekt?
+\begin{enumerate}
+    \item[A)] \texttt{'name': "Max"}
+    \item[B)] \texttt{"age": '30'}
+    \item[C)] \texttt{"city": "Berlin"}
+    \item[D)] \texttt{isActive: true}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: JSON – Frage 4}
+\textbf{Frage 4:} Welches der folgenden JSON-Schlüssel-Wert-Paare ist syntaktisch korrekt?
+\vspace{1em}
+\textbf{Korrekte Antwort: C) \texttt{"city": "Berlin"}} (Schlüssel und Strings in doppelten Anführungszeichen)
+\end{frame}
+
+
+% --- RegEx in Python ---
+\section{RegEx in Python}
+
+\begin{frame}[fragile]
+\frametitle{Was sind Reguläre Ausdrücke (RegEx)?}
+RegEx sind \textbf{Suchmuster} in Texten.
+\begin{itemize}
+    \item Finden, Ersetzen, Validieren von Textteilen.
+    \item Extrem mächtig und flexibel.
+    \item Syntax kann anfangs komplex wirken.
+\end{itemize}
+\textbf{Beispiele für Anwendungsfälle:}
+\begin{itemize}
+    \item E-Mail-Validierung: \texttt{name@domain.com}
+    \item Extraktion von Telefonnummern oder URLs
+    \item Suchen \& Ersetzen von Wörtern
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{RegEx Grundlagen: Einfache Metazeichen}
+Metazeichen haben eine spezielle Bedeutung:
+\begin{itemize}
+    \item \texttt{.}\quad Beliebiges Zeichen (außer oft Zeilenumbruch)
+    \item \texttt{\^}\quad Anfang des Strings
+    \item \texttt{\$}\quad Ende des Strings
+    \item \texttt{|}\quad Oder (z.B. \texttt{rot|grün})
+\end{itemize}
+\textbf{Quantifizierer (wie oft?):}
+\begin{itemize}
+    \item \texttt{*}\quad Null oder öfter (z.B. \texttt{ab*} $\rightarrow$ a, ab, abb)
+    \item \texttt{+}\quad Einmal oder öfter (z.B. \texttt{ab+} $\rightarrow$ ab, abb)
+    \item \texttt{?}\quad Null oder einmal (z.B. \texttt{colou?r} $\rightarrow$ color, colour)
+    \item \texttt{\{n\}}\quad Genau n-mal (z.B. \texttt{x\{3\}} $\rightarrow$ xxx)
+    \item \texttt{\{n,\}}\quad Mindestens n-mal
+    \item \texttt{\{n,m\}}\quad Mindestens n, maximal m-mal
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{RegEx Grundlagen: Zeichenklassen und Gruppen}
+\textbf{Zeichenklassen \texttt{[]}:} Definiert eine Menge erlaubter Zeichen.
+\begin{itemize}
+    \item \texttt{[abc]}\quad 'a', 'b' oder 'c'
+    \item \texttt{[a-z]}\quad Jeder Kleinbuchstabe
+    \item \texttt{[0-9]}\quad Jede Ziffer
+    \item \texttt{[\^aeiou]}\quad Kein Vokal (Negation mit \texttt{\^} \textit{innerhalb} der Klasse)
+\end{itemize}
+\textbf{Gruppierung \texttt{()}:}
+\begin{itemize}
+    \item Fasst Teile eines Musters zusammen (z.B. \texttt{(ab)+}).
+    \item Ermöglicht Extraktion von Teil-Matches.
+\end{itemize}
+\textbf{Escape-Zeichen \texttt{\textbackslash{}}:} Hebt Sonderbedeutung auf oder leitet Spezialsequenz ein.
+\begin{itemize}
+    \item \texttt{\textbackslash{.} \textbackslash{?}} \quad Literal für Punkt, Fragezeichen.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{RegEx Grundlagen: Spezielle Sequenzen}
+Nützliche Abkürzungen:
+\begin{itemize}
+    \item \texttt{\textbackslash{}d} : Jede Ziffer (wie \texttt{[0-9]})
+    \item \texttt{\textbackslash{}D} : Jedes Nicht-Ziffer-Zeichen
+    \item \texttt{\textbackslash{}w} : Jedes alphanumerische Zeichen (Buchstabe, Zahl, \_) (wie \texttt{[a-zA-Z0-9\_]})
+    \item \texttt{\textbackslash{}W} : Jedes nicht-alphanumerische Zeichen
+    \item \texttt{\textbackslash{}s} : Jedes Whitespace-Zeichen (Leerz., Tab, \textbackslash{}n)
+    \item \texttt{\textbackslash{}S} : Jedes Nicht-Whitespace-Zeichen
+    \item \texttt{\textbackslash{}b} : Wortgrenze (z.B. \texttt{\textbackslash{}bcat\textbackslash{}b} findet "cat", nicht "caterpillar")
+    \item \texttt{\textbackslash{}B} : Keine Wortgrenze
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Python und RegEx: Das \texttt{re}-Modul}
+\begin{lstlisting}[language=Python]
+import re
+\end{lstlisting}
+\textbf{Kernfunktionen:}
+\begin{itemize}
+    \item \texttt{re.match(pattern, string)}: Sucht Muster \textbf{am Anfang} des Strings.
+    \item \texttt{re.search(pattern, string)}: Sucht Muster \textbf{irgendwo} im String (erster Treffer).
+    \item \texttt{re.findall(pattern, string)}: Findet \textbf{alle} Treffer (als Liste).
+    \item \texttt{re.finditer(pattern, string)}: Wie \texttt{findall}, aber gibt Iterator von Match-Objekten.
+    \item \texttt{re.sub(pattern, repl, string)}: Suchen und \textbf{Ersetzen}.
+    \item \texttt{re.split(pattern, string)}: \textbf{Teilt} String am Muster.
+    \item \texttt{re.compile(pattern)}: Kompiliert Muster für effizientere Wiederverwendung.
+\end{itemize}
+\begin{alertblock}{Tipp: Raw Strings}
+Nutze Raw Strings \texttt{r"..."} für RegEx-Muster, um Probleme mit Backslashes zu vermeiden (z.B. \texttt{r"\textbackslash{}d"}).
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Das Match-Objekt}
+\texttt{re.search()} und \texttt{re.match()} geben bei Erfolg ein \textbf{Match-Objekt} zurück, sonst \texttt{None}.
+\begin{lstlisting}[language=Python]
+import re
+text = "Nummer: 0123-45678"
+match = re.search(r"(\d{4})-(\d{5})", text)
+
+if match:
+    print("Gefunden!")
+\end{lstlisting}
+Methoden des Match-Objekts:
+\begin{itemize}
+    \item \texttt{match.group(0)} oder \texttt{match.group()}: Gesamter gematchter Text (\texttt{"0123-45678"}).
+    \item \texttt{match.group(1)}: Erste geklammerte Gruppe (\texttt{"0123"}).
+    \item \texttt{match.group(2)}: Zweite geklammerte Gruppe (\texttt{"45678"}).
+    \item \texttt{match.groups()}: Tupel aller Gruppen (\texttt{('0123', '45678')}).
+    \item \texttt{match.start()}: Startindex des Matches.
+    \item \texttt{match.end()}: Endindex des Matches.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Beispiele: \texttt{findall} und \texttt{sub}}
+\textbf{\texttt{re.findall()}: Alle Treffer finden}
+\begin{lstlisting}[language=Python]
+import re
+text = "E-Mails: test@example.com, user@domain.org"
+emails = re.findall(r"[\w\.-]+@[\w\.-]+\.\w+", text)
+print(emails) # ['test@example.com', 'user@domain.org']
+\end{lstlisting}
+\vspace{1em}
+\textbf{\texttt{re.sub()}: Suchen und Ersetzen}
+\begin{lstlisting}[language=Python]
+import re
+text = "Hallo Herr Müller, hallo Frau Meier."
+neuer_text = re.sub(r"(Herr|Frau)\s", "Person ", text)
+print(neuer_text) # Hallo Person Müller, hallo Person Meier.
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Übungen: RegEx in Python}
+\textbf{Übung 1:}
+Skript: Prüfe, ob Eingabe eine gültige dt. PLZ ist (5 Ziffern). Nutze \texttt{re.match()}.
+\vspace{0.5em}
+
+\textbf{Übung 2:}
+Text: "Meeting am 2024-06-15 um 14:30. Nächster Termin 2024-07-01."
+Extrahiere alle Daten (YYYY-MM-DD) mit \texttt{re.findall()}.
+\vspace{0.5em}
+
+\textbf{Übung 3:}
+String: "Dies Ist Ein TestSATZ". Ersetze alle Großbuchstaben mit 'X' via \texttt{re.sub()}.
+\vspace{0.5em}
+
+\textbf{Übung 4:}
+HTML-String: \texttt{"Das ist <b>wichtig</b> und <b>auch fett</b>."}
+Extrahiere Inhalte der \texttt{<b>}-Tags. Ergebnis: \texttt{['wichtig', 'auch fett']}.
+\end{frame}
+
+% --- Quiz: RegEx in Python ---
+\begin{frame}[fragile]
+\frametitle{Quiz: RegEx in Python – Frage 1}
+Welches Metazeichen passt auf "null oder mehr" Wiederholungen des vorhergehenden Zeichens/Gruppe?
+\begin{enumerate}
+    \item[A)] \texttt{+}
+    \item[B)] \texttt{?}
+    \item[C)] \texttt{*}
+    \item[D)] \texttt{\{0,\}}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: RegEx in Python – Frage 1}
+\textbf{Frage 1:} Welches Metazeichen passt auf "null oder mehr" Wiederholungen des vorhergehenden Zeichens/Gruppe?
+\vspace{1em}
+\textbf{Korrekte Antwort: C) \texttt{*}} \textit{(D ist äquivalent, C ist das primäre Metazeichen)}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: RegEx in Python – Frage 2}
+Welche \texttt{re}-Funktion ist am besten geeignet, um zu prüfen, ob ein Muster \textit{irgendwo} in einem String vorkommt und das erste Vorkommen als Match-Objekt zurückzugeben?
+\begin{enumerate}
+    \item[A)] \texttt{re.match()}
+    \item[B)] \texttt{re.findall()}
+    \item[C)] \texttt{re.search()}
+    \item[D)] \texttt{re.fullmatch()}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: RegEx in Python – Frage 2}
+\textbf{Frage 2:} Welche \texttt{re}-Funktion ist am besten geeignet, um zu prüfen, ob ein Muster \textit{irgendwo} in einem String vorkommt und das erste Vorkommen als Match-Objekt zurückzugeben?
+\vspace{1em}
+\textbf{Korrekte Antwort: C) \texttt{re.search()}}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: RegEx in Python – Frage 3}
+Was ist der Zweck von Raw Strings (\texttt{r"..."}) in Python bei der Verwendung von Regulären Ausdrücken?
+\begin{enumerate}
+    \item[A)] Sie machen den Ausdruck schneller.
+    \item[B)] Sie erlauben Kommentare im Ausdruck.
+    \item[C)] Sie verhindern, dass Backslashes als Escape-Sequenzen von Python interpretiert werden.
+    \item[D)] Sie funktionieren nur mit ASCII-Zeichen.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: RegEx in Python – Frage 3}
+\textbf{Frage 3:} Was ist der Zweck von Raw Strings (\texttt{r"..."}) in Python bei der Verwendung von Regulären Ausdrücken?
+\vspace{1em}
+\textbf{Korrekte Antwort: C) Sie verhindern, dass Backslashes als Escape-Sequenzen von Python interpretiert werden.}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Quiz: RegEx in Python – Frage 4}
+Der Reguläre Ausdruck \texttt{r"\textbackslash{}d\{3\}-\textbackslash{}d\{3\}"} passt auf welchen der folgenden Strings?
+\begin{enumerate}
+    \item[A)] \texttt{abc-def}
+    \item[B)] \texttt{1234-567}
+    \item[C)] \texttt{12-345}
+    \item[D)] \texttt{123-456}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Antwort: RegEx in Python – Frage 4}
+\textbf{Frage 4:} Der Reguläre Ausdruck \texttt{r"\textbackslash{}d\{3\}-\textbackslash{}d\{3\}"} passt auf welchen der folgenden Strings?
+\vspace{1em}
+\textbf{Korrekte Antwort: D) \texttt{123-456}}
+\end{frame}
+
+
+% --- Abschluss ---
+\section{Zusammenfassung und Ausblick}
+\begin{frame}[fragile]
+\frametitle{Das Wichtigste in Kürze}
+\textbf{File Handling:}
+\begin{itemize}
+    \item Dateien öffnen (\texttt{open()}), lesen, schreiben, schließen.
+    \item Sicher mit \texttt{with}-Block.
+    \item Modi (\texttt{"r"}, \texttt{"w"}, \texttt{"a"}).
+    \item Löschen mit \texttt{os.remove()}, \texttt{os.rmdir()}, \texttt{shutil.rmtree()}.
+\end{itemize}
+\textbf{JSON:}
+\begin{itemize}
+    \item Standard für Datenaustausch (Objekte, Arrays, Werte).
+    \item Python-Modul \texttt{json} (\texttt{dumps}, \texttt{loads}, \texttt{dump}, \texttt{load}).
+\end{itemize}
+\textbf{RegEx:}
+\begin{itemize}
+    \item Mächtige Suchmuster für Text.
+    \item Python-Modul \texttt{re} (\texttt{search}, \texttt{findall}, \texttt{sub}, etc.).
+    \item Metazeichen, Klassen, Quantifizierer.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Wie geht es weiter?}
+\begin{itemize}
+    \item \textbf{Üben, üben, üben!}
+    \item Weitere Dateiformate erkunden: CSV, XML.
+    \item Fortgeschrittene RegEx-Konzepte (Lookarounds, non-greedy).
+    \item Solide Fehlerbehandlung (\texttt{try-except}) integrieren.
+    \item Praktische Projekte umsetzen!
+    \item Alle Codebeispiele und Materialien finden Sie auch im Kurs-Repository: \href{https://github.com/jowansulaiman/py-journey}{jowansulaiman/py-journey}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \centering
+    \vspace*{2cm}
+    
+    \Huge\textcolor{blue}{\textbf{Vielen Dank!}}
+    
+    \vspace{1.5cm}
+    
+    \Large\textcolor{teal}{Für Ihre Teilnahme und Aufmerksamkeit}
+    
+    \vspace{2cm}
+    
+    \footnotesize
+    \begin{tabular}{c}
+    \href{https://github.com/jowansulaiman/py-journey}{Code \& Materialien} \\
+    \url{https://github.com/jowansulaiman/py-journey}
+    \end{tabular}
+    
+\end{frame}
+
+\end{document}
