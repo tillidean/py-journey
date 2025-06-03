@@ -4,7 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72b863c8-2ee7-4847-a497-02607e81756e" name="Changes" comment="" />
+    <list default="true" id="72b863c8-2ee7-4847-a497-02607e81756e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/01_Dateihandling/01_datei_oeffnen_schliessen.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/01_Dateihandling/02_datei_with_statement.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/01_Dateihandling/03_datei_lesen_methoden.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/01_Dateihandling/04_datei_schreiben_methoden.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/01_Dateihandling/05_datei_anhaengen.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/01_Dateihandling/06_datei_loeschen.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/01_Dateihandling/07_verzeichnis_operationen.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/01_Dateihandling/08_verzeichnis_rekursiv_loeschen.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/01_Dateihandling/beispiel_lesedatei.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/02_JSON/01_json_python_zu_string.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/02_JSON/02_json_string_zu_python.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/02_JSON/03_json_python_zu_datei.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/02_JSON/04_json_datei_zu_python.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/02_JSON/05_json_komplexere_daten.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/03_RegEx/01_regex_search.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/03_RegEx/02_regex_match.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/03_RegEx/03_regex_findall.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/03_RegEx/04_regex_finditer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/03_RegEx/05_regex_sub.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/03_RegEx/06_regex_split.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/03_RegEx/07_regex_compile_flags.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/03_RegEx/08_regex_gruppen_capturing.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Code_Beispiele/03_RegEx/09_regex_raw_strings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Hausaufgaben/Serie01/Hausaufgaben_Datenverarbeitung_mit_Python.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Hausaufgaben/Serie01/Hausaufgaben_Datenverarbeitung_mit_Python.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Praesentationen/Dateien_JSON_Reguläre_Ausdrücke.tex" beforeDir="false" afterPath="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Praesentationen/Dateien_JSON_Reguläre_Ausdrücke.tex" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,22 +53,106 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="2y0qUJ2AsrglfEG7xoMWhP20kmG" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.python --version.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/jowan/Documents/py-journey&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "LaTeX.Dateien_JSON_Reguläre_Ausdrücke (1).executor": "Run",
+    "LaTeX.Dateien_JSON_Reguläre_Ausdrücke.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.main.executor": "Run",
+    "Python.python --version.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/home/jowan/Documents/py-journey/03_Thema_Dateiverarbeitung_JSON_RegEx/Hausaufgaben",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
-  <component name="RunManager">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Hausaufgaben" />
+      <recent name="$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Praesentationen" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Hausaufgaben/Serie01" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="Dateien_JSON_Reguläre_Ausdrücke (1)" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory" temporary="true">
+      <texify>
+        <compiler>PDFLATEX</compiler>
+        <compiler-path />
+        <sumatra-path />
+        <pdf-viewer>OKULAR</pdf-viewer>
+        <viewer-command />
+        <compiler-arguments />
+        <envs />
+        <expand-macros-in-environment-variables>false</expand-macros-in-environment-variables>
+        <before-run-command />
+        <main-file>$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Praesentationen/Dateien_JSON_Reguläre_Ausdrücke.tex</main-file>
+        <output-path>$PROJECT_DIR$/out</output-path>
+        <auxil-path>{projectDir}/auxil</auxil-path>
+        <compile-twice>false</compile-twice>
+        <output-format>PDF</output-format>
+        <latex-distribution>TEXLIVE</latex-distribution>
+        <has-been-run>false</has-been-run>
+        <bib-run-config>[]</bib-run-config>
+        <makeindex-run-config>[]</makeindex-run-config>
+      </texify>
+      <method v="2" />
+    </configuration>
+    <configuration name="Dateien_JSON_Reguläre_Ausdrücke" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory" temporary="true">
+      <texify>
+        <compiler>PDFLATEX</compiler>
+        <compiler-path />
+        <sumatra-path />
+        <pdf-viewer>OKULAR</pdf-viewer>
+        <viewer-command />
+        <compiler-arguments />
+        <envs />
+        <expand-macros-in-environment-variables>false</expand-macros-in-environment-variables>
+        <before-run-command />
+        <main-file>$PROJECT_DIR$/03_Thema_Dateiverarbeitung_JSON_RegEx/Praesentationen/Dateien_JSON_Reguläre_Ausdrücke.tex</main-file>
+        <output-path>$PROJECT_DIR$/out</output-path>
+        <auxil-path>{projectDir}/auxil</auxil-path>
+        <compile-twice>false</compile-twice>
+        <output-format>PDF</output-format>
+        <latex-distribution>TEXLIVE</latex-distribution>
+        <has-been-run>false</has-been-run>
+        <bib-run-config>[]</bib-run-config>
+        <makeindex-run-config>[]</makeindex-run-config>
+      </texify>
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="BeginOfLife" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="python --version" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BeginOfLife" />
       <option name="ENV_FILES" value="" />
@@ -65,6 +177,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="LaTeX.Dateien_JSON_Reguläre_Ausdrücke (1)" />
+        <item itemvalue="LaTeX.Dateien_JSON_Reguläre_Ausdrücke" />
         <item itemvalue="Python.python --version" />
       </list>
     </recent_temporary>

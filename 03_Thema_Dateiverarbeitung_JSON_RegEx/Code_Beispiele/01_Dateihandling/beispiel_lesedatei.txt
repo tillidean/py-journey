@@ -1,0 +1,4 @@
+Hallo Welt!
+Dies ist die zweite Zeile der Beispieldatei.
+Python macht Spaß.
+Ende der Datei.
