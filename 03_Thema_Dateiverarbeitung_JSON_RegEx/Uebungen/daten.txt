@@ -1,0 +1,6 @@
+Apfel,Rot,Süß
+Banane,Gelb,Süß
+Zitrone,Gelb,Sauer
+Orange,Orange,Süß-Sauer
+Kiwi,Grün,Sauer
+Traube,Lila,Süß
