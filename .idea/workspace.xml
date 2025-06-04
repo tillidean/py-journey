@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72b863c8-2ee7-4847-a497-02607e81756e" name="Changes" comment="" />
+    <list default="true" id="72b863c8-2ee7-4847-a497-02607e81756e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hausaufgaben/Serie01/Abgabe/jowansulaiman.py" beforeDir="false" afterPath="$PROJECT_DIR$/Hausaufgaben/Serie01/Abgabe/jowansulaiman.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,7 +45,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/jowan/Documents/py-journey/03_Thema_Dateiverarbeitung_JSON_RegEx/Hausaufgaben",
+    "last_opened_file_path": "/home/jowan/Documents/test/py-journey",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
